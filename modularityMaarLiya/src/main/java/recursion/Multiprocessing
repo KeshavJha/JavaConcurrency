@@ -1,0 +1,56 @@
+
+
+ NodesforParallel Compute
+ Range as input 
+ request_id 
+ part_id, start , end 
+ 
+ Service 
+ 
+ 
+ IsPrime ( start, end ) ->  Workers  -> PrimePart ( request_id, part_id, start, end)
+ request_id
+ * findPrimes()
+ * List<Future> .add(part_id).
+ 
+ 
+ Sakshi Arora -- Adobe
+ Tarun Kochar -- Adobe
+ 
+ 
+ 
+ interface IsPrime {
+	public primeNumbersInRange(Integer start, BigInteger end);
+ }
+ 
+ class PrimeCalculator implements IsPrime {
+    List<Worker> workers = new ArrayList<>(10);  // TODO : Dynamic addition / removal  of workers
+    
+	public primeNumbersInRange(BigInteger start, BigInteger end) {
+     Map<Intger, List<Integer> > collating = new HashMap<>();
+	    int perPart = (end-start)/workers.size();
+		for ( int i = 0 ; i < workers.size(); i++ ) {
+			collating.put(i, workers.get(i).primesInSubRange(request_id, i, start+ i*perPart , start+ (i+1)*perPart ) );
+		}
+	 List<Integer> allNumbers = new ArrayList<>();
+	 for ( int i = 0 ; i < workers.size(); i++ ) {
+	 	allNumbers.addAll(collating.get(i));
+	 }
+	 return allNumbers;
+	}
+ }
+ 
+ interface Worker {
+ 	public primesInSubRange(String request_id, int part_id , Integer start, Integer end);
+ }
+ 
+ class ParWorker implements Worker {
+ 	
+ 	 public List<Integer> primesInSubRange(String request_id, int part_id , Integer start, Integer end) {
+ 	 List<Integer> primesInSubPart = new ArrayList<>();
+ 		for ( int i = start ; i < end ; i++ ) {
+ 			if ( primeTester.isPrime(i) { primesInSubPart.add(i); } 
+ 		}
+ 	return primesInSubPart;
+ 	}
+ }
