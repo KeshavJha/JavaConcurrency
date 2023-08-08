@@ -1,4 +1,4 @@
-package concurrency.lowLevel;
+package concurrency.lowLevel.raceCondition;
 
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;

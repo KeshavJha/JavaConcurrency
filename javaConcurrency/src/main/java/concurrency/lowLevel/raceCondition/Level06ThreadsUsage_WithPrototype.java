@@ -1,7 +1,5 @@
 package concurrency.lowLevel.raceCondition;
 
-import concurrency.lowLevel.ThreadUsage_WithPrototype;
-
 public class Level06ThreadsUsage_WithPrototype extends ThreadUsage_WithPrototype {
 	class Task1 extends ThreadUsage_WithPrototype.Task1 {
 		public void run() {
